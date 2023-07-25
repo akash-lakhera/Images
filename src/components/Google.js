@@ -26,7 +26,7 @@ function Google(props) {
           return gapi.client.drive.files.list({
             pageSize: 10,
             q: "'1_qOJ0z3kI_e2IJq4X6HqF0T1ROBESygS' in parents",
-            key: "replace with api key",
+            key: "AIzaSyAMoX6rrXtKX7M14VaV_DWW7nTiHEpyrT4",
           });
         })
         .then((r) => {
@@ -52,7 +52,7 @@ function Google(props) {
           .list({
             pageSize: 10,
             q: "'1_qOJ0z3kI_e2IJq4X6HqF0T1ROBESygS' in parents",
-            key: "replace with api key",
+            key: "AIzaSyAMoX6rrXtKX7M14VaV_DWW7nTiHEpyrT4",
             pageToken: pageToken,
           })
           .then((r) => {
