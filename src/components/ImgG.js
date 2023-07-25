@@ -9,7 +9,7 @@ function ImgG(props) {
         
        gapi.client.drive.files.get({
             fileId: props.link,
-            key:"AIzaSyCwPWpd5XQGSvO1Se2VjpBtGPnGCRbln9o",
+            key:"AIzaSyAMoX6rrXtKX7M14VaV_DWW7nTiHEpyrT4",
             fields:"thumbnailLink"
         
           }).then(res=>setData(res.result.thumbnailLink))
