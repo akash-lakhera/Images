@@ -5,3 +5,4 @@ hash:String,
 salt:String
 });
 module.exports = mongoose.model("user", users);
+// returns model for username password based user

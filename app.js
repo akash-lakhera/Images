@@ -10,16 +10,16 @@ const {
   S3Client,
   ListObjectsV2Command,
 } = require("@aws-sdk/client-s3");
-
+errorHandlerMid = require("./error");
 const client = new S3Client({
   region: "ap-south-1",
   signer: {
     sign: async (request) => request,
   },
-});
+});// create anonymous access client for aws access
 const mongoose = require("mongoose");
 port = process.env.PORT || 4000;
-errorHandlerMid = require("./error");
+
 app.use((req, res, next) => {
   next();
 });
@@ -36,6 +36,7 @@ const checkAuth = (req, res, next) => {
     next();
   } else res.status(401).send("Unauthorised");
 };
+
 app.use(
   session({
     secret: process.env.SECRET,
@@ -48,6 +49,7 @@ app.use(
     },
   })
 );
+
 require("./auth/passport2");
 require("./auth/passport");
 
@@ -58,7 +60,7 @@ const pathLogger = (req, res, next) => {
 app.use(pathLogger);
 app.use(passport.initialize());
 app.use(passport.session());
-app.get(
+app.get(//authenticate usin google route
   "/google/auth",
   passport.authenticate("google", { scope: ["email", "profile"] })
 );
@@ -69,7 +71,7 @@ app.get(
     failureRedirect: "/login",
   })
 );
-app.post("/api/login", passport.authenticate("local"), (req, res, next) => {
+app.post("/api/login", passport.authenticate("local"), (req, res, next) => {//authenticate using username and password route
   if (req.user.username)
     res.status(200).send(JSON.stringify({ message: "deez" }));
   else
@@ -78,7 +80,7 @@ app.post("/api/login", passport.authenticate("local"), (req, res, next) => {
       .send(JSON.stringify({ Error: new Error("wrong credentials") }));
 });
 
-app.get("/api/user", (req, res, next) => {
+app.get("/api/user", (req, res, next) => {//sends the current logged in user and unauthorized if no user is logged in
   console.log(req.user)
   if (req.user)
     res.status(200).send(
@@ -88,14 +90,14 @@ app.get("/api/user", (req, res, next) => {
     );
   else res.status(401).send("unauthorised");
 });
-app.get("/aws/data", async (req, res, next) => {
+app.get("/aws/data", async (req, res, next) => {//send AWS image urls to the user
   const command = new ListObjectsV2Command({
     Bucket: "testbucketfp",
   });
 
   try {
-    const response = await client.send(command);
-    let images= response.Contents.map((elem)=>{
+    const response = await client.send(command);// fetch details of images from aws
+    let images= response.Contents.map((elem)=>{//create urls for images 
       return "https://testbucketfp.s3.amazonaws.com/"+elem.Key
     })
    

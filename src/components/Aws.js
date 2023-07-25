@@ -7,11 +7,11 @@ function Aws(props) {
     if (data) {
         images = data.map((elem) => {
 
-          return <ImgG key={elem} link={elem} host={props.selectedHost}></ImgG>;
+          return <ImgG key={elem} link={elem} host={props.selectedHost}></ImgG>; //map urls to image components
         });
       }
       useEffect(() => {
-        fetch("/aws/data")
+        fetch("/aws/data") //get image urls from server
                 .then((awsdata) => awsdata.json())
                 .then((dat) => {
                   setData(dat.images)

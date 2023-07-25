@@ -6,7 +6,7 @@ function ImgG(props) {
     useEffect(() => {
         if(props.host=="google"){
 
-        
+        // get particualr image url from drive using image id recieved earlier
        gapi.client.drive.files.get({
             fileId: props.link,
             key:"AIzaSyAMoX6rrXtKX7M14VaV_DWW7nTiHEpyrT4",

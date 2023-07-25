@@ -22,7 +22,7 @@ function Google(props) {
           ],
         })
         .then(function () {
-          // do stuff with loaded APIs
+        
           return gapi.client.drive.files.list({
             pageSize: 10,
             q: "'1_qOJ0z3kI_e2IJq4X6HqF0T1ROBESygS' in parents",
@@ -63,7 +63,7 @@ function Google(props) {
       }
     };
 
-    const observer = new IntersectionObserver(
+    const observer = new IntersectionObserver(//using intersection observer to watch infinite scroll
       (entries) => {
         if (entries[0].isIntersecting) {
     
@@ -87,6 +87,8 @@ function Google(props) {
 
   return <>
      <div className="imgCont">{images}</div>
+     
         <div ref={observerTarget}></div></>;
+// ref is attached to the element after the images container to trigger observer and fetch data when this element appears on the viewport
 }
 export default Google;

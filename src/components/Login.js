@@ -9,12 +9,12 @@ import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { Divider } from "@mui/material";
 
-// TODO remove, this demo shouldn't need to reset the theme.
+
 
 export default function Login() {
   const navigate = useNavigate();
   
-  const handleSubmit = (event) => {
+  const handleSubmit = (event) => {//submit username and password 
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const formval = {

@@ -14,7 +14,7 @@ function Dashboard() {
     fetch("/api/user")
     .then((response) => {
       if (response.status === 200) return response.json();
-      else navigate("/login");
+      else navigate("/login");//if user is not logged in navigate them to login page
     })
     .then((json) => {
    
@@ -73,8 +73,11 @@ function Dashboard() {
               S3
             </button>
           </div>
+          
        <div>
-        {selectedHost=="google"?<Google selectedHost={selectedHost}/>:<Aws selectedHost={selectedHost}/>}
+        {selectedHost=="google"?<Google selectedHost={selectedHost}/>:<Aws selectedHost={selectedHost}/>
+        //display images from google or aws depending on selection by user
+        }
        </div>
          <div className="obs"></div>
         </div>
