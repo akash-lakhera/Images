@@ -122,7 +122,7 @@ app.use(errorHandlerMid);
 conn
   .then(() => {
     app.listen(port, () => {
-      console.log("server onn");
+      console.log("server on port 4000");
     });
   })
   .catch((err) => {
